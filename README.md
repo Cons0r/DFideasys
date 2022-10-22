@@ -12,7 +12,7 @@ returns array
         "_id": "String",
         "username": "String",
         "uuid": "String",
-        "pages": "String[]"
+        "text": "String[]"
     }
 ]
 ```
@@ -25,7 +25,7 @@ body:
 ```json
 {
     "uuid": "String",
-    "pages": "String[]"
+    "text": "String[]"
 }
 ```
 
@@ -36,7 +36,7 @@ returns one idea
     "_id": "id",
     "username": "String",
     "uuid": "String",
-    "pages": "String[]"
+    "text": "String[]"
 }
 ```
 

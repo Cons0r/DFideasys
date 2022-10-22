@@ -1,6 +1,8 @@
 <script lang=ts>
     import { onMount } from "svelte";
-    import { currentData } from '$lib/store'
+    import { currentData, isBook, openBookID } from '$lib/store'
+    import Book from '$lib/Book.svelte'
+  import List from "$lib/List.svelte";
     const wait = (ts: number) => new Promise((res) => {
         setTimeout(res, ts)
     })
@@ -21,6 +23,7 @@
         currentData.set(data)
         target?.querySelector('svg')?.classList.remove('animate-spin')
     }
+    openBookID.subscribe(console.log)
 </script>
 
 <div class="h-screen w-screen flex flex-col">
@@ -32,6 +35,13 @@
             <div class="w-2"></div>
             <span>Refresh</span>    
         </button>
+    </div>
+    <div class="flex-grow flex flex-col divide-y-2 divide-neutral-focus overflow-y-scroll">
+        {#if $isBook}
+            <Book />
+        {:else}
+            <List />
+        {/if}
     </div>
 </div>
 
