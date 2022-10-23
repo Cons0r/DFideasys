@@ -1,27 +1,9 @@
 <script lang=ts>
     import { onMount } from "svelte";
-    import { currentData, isBook, openBookID } from '$lib/store'
+    import { isBook, debug, refresh } from '$lib/store'
     import Book from '$lib/Book.svelte'
     import List from "$lib/List.svelte";
-    const wait = (ts: number) => new Promise((res) => {
-        setTimeout(res, ts)
-    })
     onMount(refresh)
-    async function getData() {
-        const r = await fetch('/api/ideas', {
-            method: 'GET'
-        })
-        return await r.json()
-    }
-
-    async function refresh(e?: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
-        e?.currentTarget?.querySelector('svg')?.classList.add('animate-spin')
-        const target = e?.currentTarget
-        const data = await getData()
-        await wait(400)
-        currentData.set(data)
-        target?.querySelector('svg')?.classList.remove('animate-spin')
-    }
 </script>
 
 <div class="h-screen w-screen flex flex-col">
@@ -33,6 +15,14 @@
             <div class="w-2"></div>
             <span>Refresh</span>    
         </button>
+        <div class="flex-grow"></div>
+        <div class="form-control">
+            <label class="label cursor-pointer">
+                <input type="checkbox" class="toggle toggle-sm" bind:checked={$debug} />
+                <div class="w-2"></div>
+                <span class="label-text">Debug</span> 
+            </label>
+        </div>
     </div>
     <div class="flex-grow flex flex-col divide-y-2 divide-neutral-focus overflow-y-scroll no-scrollbar">
         {#if $isBook}

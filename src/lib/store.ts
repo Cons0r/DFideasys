@@ -24,9 +24,32 @@ const openBookID = checkable<string | null>(null, (value) => {
         return v._id.toString() === value
     })===-1?false:true
 })
+const debug = writable<boolean>(false)
+
+const wait = (ts: number) => new Promise((res) => {
+    setTimeout(res, ts)
+})
+
+async function getData() {
+    const r = await fetch('/api/ideas', {
+        method: 'GET'
+    })
+    return await r.json()
+}
+
+async function refresh(e?: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+    e?.currentTarget?.querySelector('svg')?.classList.add('animate-spin')
+    const target = e?.currentTarget
+    const data = await getData()
+    await wait(400)
+    currentData.set(data)
+    target?.querySelector('svg')?.classList.remove('animate-spin')
+}
 
 export {
     currentData,
     isBook,
     openBookID,
+    debug,
+    refresh
 }
