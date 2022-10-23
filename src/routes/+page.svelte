@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { currentData, isBook, openBookID } from '$lib/store'
     import Book from '$lib/Book.svelte'
-  import List from "$lib/List.svelte";
+    import List from "$lib/List.svelte";
     const wait = (ts: number) => new Promise((res) => {
         setTimeout(res, ts)
     })
@@ -15,7 +15,6 @@
     }
 
     async function refresh(e?: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
-        console.log(e)
         e?.currentTarget?.querySelector('svg')?.classList.add('animate-spin')
         const target = e?.currentTarget
         const data = await getData()
@@ -23,7 +22,6 @@
         currentData.set(data)
         target?.querySelector('svg')?.classList.remove('animate-spin')
     }
-    openBookID.subscribe(console.log)
 </script>
 
 <div class="h-screen w-screen flex flex-col">

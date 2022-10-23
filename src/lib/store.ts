@@ -19,7 +19,6 @@ function checkable<T>(value: T | undefined, cb: (value: T) => boolean): Writable
 const currentData = writable<HydratedIdea[]>([])
 const isBook = writable<boolean>(false)
 const openBookID = checkable<string | null>(null, (value) => {
-    console.log(value)
     if(value === null) return true
     return get(currentData).findIndex((v) => {
         return v._id.toString() === value
