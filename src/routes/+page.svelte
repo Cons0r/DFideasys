@@ -34,7 +34,7 @@
             <span>Refresh</span>    
         </button>
     </div>
-    <div class="flex-grow flex flex-col divide-y-2 divide-neutral-focus overflow-y-scroll">
+    <div class="flex-grow flex flex-col divide-y-2 divide-neutral-focus overflow-y-scroll no-scrollbar">
         {#if $isBook}
             <Book />
         {:else}
